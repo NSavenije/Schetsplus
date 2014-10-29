@@ -51,5 +51,15 @@ namespace SchetsEditor
         {   string kleurNaam = ((ToolStripMenuItem)obj).Text;
             penkleur = Color.FromName(kleurNaam);
         }
+
+        public void opslaan(object sender, EventArgs ea)
+        {
+           this.schets.opslaan();
+        }
+
+       public void openBitmap(Bitmap afbeelding)
+        {
+           this.schets.laden(afbeelding);
+        }
     }
 }

@@ -53,6 +53,7 @@ namespace SchetsEditor
 
     public abstract class TweepuntTool : StartpuntTool
     {
+        Bouwsteen bouwsteen = new Bouwsteen();
         public static Rectangle Punten2Rechthoek(Point p1, Point p2)
         {   return new Rectangle( new Point(Math.Min(p1.X,p2.X), Math.Min(p1.Y,p2.Y))
                                 , new Size (Math.Abs(p1.X-p2.X), Math.Abs(p1.Y-p2.Y))
@@ -84,6 +85,13 @@ namespace SchetsEditor
         
         public virtual void Compleet(Graphics g, Point p1, Point p2)
         {   this.Bezig(g, p1, p2);
+        }
+
+        public override void Klaar(Graphics g, Point p1, Point p2)
+        {
+           bouwsteen.begin = p1;
+           bouwsteen.einde = p2;
+           bouwsteen.brush = kwast;
         }
     }
 

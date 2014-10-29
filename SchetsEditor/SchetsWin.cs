@@ -89,12 +89,23 @@ namespace SchetsEditor
             this.maakAktieButtons(deKleuren);
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
+            this.FormClosed += this.beveilig;
+        }
+
+        private void beveilig(object sender, EventArgs ea)
+        {
+           /* Configure the message box to be displayed 
+           string messageBoxText = "Do you want to save changes?";
+           string caption = "Word Processor";
+           MessageBoxButton button = MessageBoxButton.YesNoCancel;
+           MessageBoxImage icon = MessageBoxImage.Warning;*/
         }
 
         private void maakFileMenu()
         {   
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
+            menu.DropDownItems.Add("Opslaan", null, this.schetscontrol.opslaan);
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
         }
@@ -179,12 +190,11 @@ namespace SchetsEditor
             cbb.SelectedIndex = 0;
             paneel.Controls.Add(cbb);
         }
-
-       public void SaveAsPng()
+       public void setBitmap(Bitmap afbeelding)
         {
-          Bitmap bitmap = new Bitmap(this.Width, this.Height);
-          bitmap.Save("temp");
-          bitmap.Save(@"C:\Users\noud\Documents\Imp\SchetsEditor\Saves.png", ImageFormat.Png);
+           this.schetscontrol.openBitmap(afbeelding);
         }
-    }
+
+
+   }
 }

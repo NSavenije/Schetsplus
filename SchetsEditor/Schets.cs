@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace SchetsEditor
 {
     class Schets
     {
         private Bitmap bitmap;
-        
+
+        public List<Bouwsteen>lijst = new List<Bouwsteen>();
         public Schets()
         {
             bitmap = new Bitmap(1, 1);
@@ -29,6 +32,11 @@ namespace SchetsEditor
                 bitmap = nieuw;
             }
         }
+
+       public void laden(Bitmap afbeelding)
+        {
+           bitmap = afbeelding;
+        }
         public void Teken(Graphics gr)
         {
             gr.DrawImage(bitmap, 0, 0);
@@ -41,6 +49,14 @@ namespace SchetsEditor
         public void Roteer()
         {
             bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+        }
+
+        public void opslaan()
+        {
+           SaveFileDialog svd = new SaveFileDialog();
+           svd.Filter = "png files (*.png)|*.png|bitmap (*.bmp)|*.bmp|jpg files (*.jpg)|*.jpg";
+           if (svd.ShowDialog() == DialogResult.OK)
+           bitmap.Save(svd.FileName, ImageFormat.Png);
         }
     }
 }

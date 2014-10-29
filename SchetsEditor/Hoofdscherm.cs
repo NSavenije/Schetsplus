@@ -22,7 +22,6 @@ namespace SchetsEditor
         {   ToolStripDropDownItem menu;
             menu = new ToolStripMenuItem("File");
             menu.DropDownItems.Add("Nieuw", null, this.nieuw);
-            menu.DropDownItems.Add("Opslaan", null, this.opslaan);
             menu.DropDownItems.Add("Laden", null, this.laden);
             menu.DropDownItems.Add("Afsluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
@@ -50,13 +49,19 @@ namespace SchetsEditor
         {   this.Close();
         }
 
-       private void opslaan(object sender, EventArgs e)
-        {
-           s.SaveAsPng();
-
-        }
-
        private void laden(object sender, EventArgs e)
-       { }
+       {
+          OpenFileDialog ofd = new OpenFileDialog();
+          ofd.InitialDirectory = "C://";
+          ofd.Filter = "png files (*.png)|*.png|All files (*.*)|*.*";
+          if (ofd.ShowDialog() == DialogResult.OK)
+          {
+             Bitmap afbeelding = new Bitmap(ofd.FileName);
+             SchetsWin s = new SchetsWin();
+             s.MdiParent = this;
+             s.setBitmap(afbeelding);
+             s.Show();
+          }
+       }
     }
 }

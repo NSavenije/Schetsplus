@@ -5,3 +5,10 @@ C:\Users\noud\Documents\Imp\SchetsEditor\obj\x86\Debug\SchetsEditor.Properties.R
 C:\Users\noud\Documents\Imp\SchetsEditor\obj\x86\Debug\SchetsEditor.csproj.GenerateResource.Cache
 C:\Users\noud\Documents\Imp\SchetsEditor\obj\x86\Debug\Schets.exe
 C:\Users\noud\Documents\Imp\SchetsEditor\obj\x86\Debug\Schets.pdb
+C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\Schets.exe
+C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\Schets.pdb
+C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\SchetsEditor.csprojResolveAssemblyReference.cache
+C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\SchetsEditor.Properties.Resources.resources
+C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\SchetsEditor.csproj.GenerateResource.Cache
+C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\bin\Debug\Schets.exe
+C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\bin\Debug\Schets.pdb

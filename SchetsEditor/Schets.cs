@@ -15,6 +15,12 @@ namespace SchetsEditor
         {
             bitmap = new Bitmap(1, 1);
         }
+
+        public void AddBouwsteen(Bouwsteen bouwsteen)
+        {
+           this.lijst.Add(bouwsteen);
+        }
+
         public Graphics BitmapGraphics
         {
             get { return Graphics.FromImage(bitmap); }
@@ -39,8 +45,15 @@ namespace SchetsEditor
         }
         public void Teken(Graphics gr)
         {
-            gr.DrawImage(bitmap, 0, 0);
+           Graphics.FromImage((Image)this.bitmap).FillRectangle(Brushes.White, 0, 0, this.bitmap.Width, this.bitmap.Height);
+           Graphics bitmap = Graphics.FromImage((Image)this.bitmap);
+           foreach (Bouwsteen item in lijst)
+           {
+              item.teken(bitmap);
+           } 
+           gr.DrawImage(this.bitmap, 0, 0);
         }
+
         public void Schoon()
         {
             Graphics gr = Graphics.FromImage(bitmap);
@@ -53,10 +66,22 @@ namespace SchetsEditor
 
         public void opslaan()
         {
-           SaveFileDialog svd = new SaveFileDialog();
-           svd.Filter = "png files (*.png)|*.png|bitmap (*.bmp)|*.bmp|jpg files (*.jpg)|*.jpg";
-           if (svd.ShowDialog() == DialogResult.OK)
-           bitmap.Save(svd.FileName, ImageFormat.Png);
+           SaveFileDialog sfd = new SaveFileDialog();
+           sfd.Filter = "png files (*.png)|*.png|bitmap (*.bmp)|*.bmp|jpg files (*.jpg)|*.jpg";
+           if (sfd.ShowDialog() == DialogResult.OK)
+           bitmap.Save(sfd.FileName, ImageFormat.Png);
+        }
+
+        public void RemoveBouwsteen(int x, int y)
+        {
+           for (int i = lijst.Count - 1; i >= 0; i--)
+           {
+              if ()
+              {
+                 lijst.RemoveAt(i);
+                 return;
+              }
+           }
         }
     }
 }

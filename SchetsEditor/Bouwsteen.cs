@@ -6,61 +6,130 @@ using System.Drawing;
 
 namespace SchetsEditor
 {
-   class Bouwsteen
+   public abstract class Bouwsteen
    {
-      private ISchetsTool tool;
-      private Color tint;
-      private Point start, eind;
-      private string text;
-      private Font font;
-      private SizeF grootte;
-      private Brush kwast;
-      public ISchetsTool Soort
+      int beginx, beginy;
+      protected Size grootte;
+
+      public int X
+        { get { return this.beginx; } }
+
+        public int Y
+        { get { return this.beginy; } }
+
+        public Bouwsteen(int x, int y, Size size)
+        {
+            this.beginx = x;
+            this.beginy = y;
+            this.grootte = size;
+        }
+        public abstract void teken(Graphics g);
+   }
+
+   public class TekstSteen : Bouwsteen
+   {
+      Font font;
+      Char karakter;
+      Brush kwast;
+
+      public TekstSteen(int x, int y, char karakter, Font font, Brush kwast) : base(x, y, new Size())
       {
-         get { return tool; }
-         set { tool = value; }
+         this.karakter = karakter;
+         this.font = font;
+         this.kwast = kwast;
+      }
+      public override void teken(Graphics g)
+      { g.DrawString(karakter.ToString(), font, kwast, this.X, this.Y);
+      }
+      public Size Grootte
+      { set { this.grootte = value; } }
+
+   }
+   public class LijnSteen : Bouwsteen
+   {
+      Pen pen;
+
+      public LijnSteen(int x, int y, Pen pen, Size grootte) : base(x, y, grootte)
+      {
+         this.pen = pen;
       }
 
-      public Color kleur
-      {
-         get { return tint; }
-         set { tint = value; }
+   public override void teken(Graphics g)
+   {
+      g.DrawLine(pen, X, Y, X + grootte.Width, Y + grootte.Height);
+   }
+   }
+
+   public class RechthoekSteen : Bouwsteen
+   {
+      Pen pen;
+
+      public RechthoekSteen(int x, int y, Pen pen, Size grootte) : base(x, y, grootte)
+      { this.pen = pen;
       }
 
-      public Point begin
+      public override void teken(Graphics g)
+      { g.DrawRectangle(pen, X, Y, grootte.Width, grootte.Height);
+      }
+   }
+
+   public class VolRechthoekSteen : Bouwsteen
+   {
+      Brush kwast;
+      public VolRechthoekSteen(int x, int y, Brush kwast, Size grootte) : base(x, y, grootte)
       {
-         get { return start; }
-         set { start = value; }
+         this.kwast = kwast;
       }
 
-      public Point einde
-      {
-         get { return eind; }
-         set { eind = value; }
+      public override void teken(Graphics g)
+      { g.FillRectangle(kwast, X, Y, grootte.Width, grootte.Height); 
+      }
+   }
+   public class CirkelSteen : Bouwsteen
+   {
+      Pen pen;
+      public CirkelSteen(int x, int y, Pen pen, Size grootte) : base(x, y, grootte)
+      { this.pen = pen;
       }
 
-      public string inhoud
-      {
-         get { return text; }
-         set { text = value; }
+      public override void teken(Graphics g)
+      { g.DrawEllipse(pen, X, Y, grootte.Width, grootte.Height);
+      }
+   }
+
+   public class VolCirkelSteen : Bouwsteen
+   {
+      Brush kwast;
+      public VolCirkelSteen(int x, int y, Brush kwast, Size grootte) : base(x, y, grootte)
+      { this.kwast = kwast;
       }
 
-      public Font type
+      public override void teken(Graphics g)
+      { g.FillEllipse(kwast, X, Y, grootte.Width, grootte.Height);
+      }
+   }
+
+   public class PenSteen : Bouwsteen
+   {
+      Pen pen;
+      List<LijnSteen>penLijst;
+      public PenSteen(int x, int y, Pen pen) : base(x, y, new Size())
       {
-         get { return font; }
-         set { font = value; }
+         this.pen = pen;
+         penLijst = new List<LijnSteen>();
       }
 
-      public SizeF formaat
-      {
-         get { return grootte; }
-         set { grootte = value; }
+      public void Lijntoevoeg(LijnSteen lijn)
+      { penLijst.Add(lijn);
       }
 
-      public Brush brush
+      public override void teken(Graphics g)
       {
-         get { return kwast; }
-         set { kwast = value; }
+         foreach (LijnSteen lijn in penLijst)
+         {
+            lijn.teken(g);
+         }
       }
    }
 }
+

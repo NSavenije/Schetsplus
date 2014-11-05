@@ -52,6 +52,29 @@ namespace SchetsEditor
             penkleur = Color.FromName(kleurNaam);
         }
 
+        public void AddBouwsteen(Bouwsteen bouwsteen)
+        {
+           this.schets.AddBouwsteen(bouwsteen);
+        }
+        
+       public void RemoveBouwsteen(int x, int y)
+        {
+           this.schets.RemoveBouwsteen(x, y);
+           this.Invalidate();
+        }
+        /*public void listEntry(ISchetsTool tool, SizeF grootte, string text, Font font, Point begin, Point eind)
+        {
+           Bouwsteen entry = new Bouwsteen();
+           entry.tool = tool;
+           entry.grootte = grootte;
+           entry.kleur = this.PenKleur;
+           entry.text = text;
+           entry.font = font;
+           entry.begin = begin;
+           entry.einde = eind;
+           schets.lijst.Add(entry);
+        }*/
+
         public void opslaan(object sender, EventArgs ea)
         {
            this.schets.opslaan();

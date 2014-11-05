@@ -65,6 +65,7 @@ namespace SchetsEditor
             schetscontrol.MouseDown += (object o, MouseEventArgs mea) =>
                                        {   vast=true;  
                                            huidigeTool.MuisVast(schetscontrol, mea.Location); 
+                                           
                                        };
             schetscontrol.MouseMove += (object o, MouseEventArgs mea) =>
                                        {   if (vast)
@@ -77,6 +78,7 @@ namespace SchetsEditor
             schetscontrol.KeyPress +=  (object o, KeyPressEventArgs kpea) => 
                                        {   huidigeTool.Letter  (schetscontrol, kpea.KeyChar); 
                                        };
+            
             this.Controls.Add(schetscontrol);
 
             menuStrip = new MenuStrip();

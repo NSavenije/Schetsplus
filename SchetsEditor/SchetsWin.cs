@@ -91,16 +91,20 @@ namespace SchetsEditor
             this.maakAktieButtons(deKleuren);
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
-            this.FormClosed += this.beveilig;
+            this.FormClosing += this.beveilig;
         }
 
-        private void beveilig(object sender, EventArgs ea)
+		  private void beveilig(object sender, FormClosingEventArgs e)
         {
-           /* Configure the message box to be displayed 
-           string messageBoxText = "Do you want to save changes?";
-           string caption = "Word Processor";
-           MessageBoxButton button = MessageBoxButton.YesNoCancel;
-           MessageBoxImage icon = MessageBoxImage.Warning;*/
+           //laat een waarschuwig zien als de gebruiker een SchetsWin sluit zonder eerst op te slaan.
+			  if (!schetscontrol.Saved)
+			  {
+				  DialogResult afsluiten = MessageBox.Show("Afsluiten zonder op te slaan?", "Let op", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+				  if (afsluiten == DialogResult.Cancel)
+					  e.Cancel = true;
+				  else if (afsluiten == DialogResult.No)
+					  this.schetscontrol.opslaan(sender, e);
+			  }
         }
 
         private void maakFileMenu()
@@ -108,6 +112,7 @@ namespace SchetsEditor
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
             menu.DropDownItems.Add("Opslaan", null, this.schetscontrol.opslaan);
+				menu.DropDownItems.Add("Opslaan als Schets", null, this.schetscontrol.opslaanSchets);
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
         }
@@ -192,11 +197,16 @@ namespace SchetsEditor
             cbb.SelectedIndex = 0;
             paneel.Controls.Add(cbb);
         }
-       public void setBitmap(Bitmap afbeelding)
+
+        //geeft de afbeelding door aan de SchetsControl
+		  public void setBitmap(Bitmap afbeelding)
         {
            this.schetscontrol.openBitmap(afbeelding);
         }
 
-
+		  public void laadSchets(List<string> lijst)
+		  {
+			  this.schetscontrol.laadSchets(lijst);
+		  }
    }
 }

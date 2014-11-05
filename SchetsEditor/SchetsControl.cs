@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace SchetsEditor
 {
@@ -10,9 +11,15 @@ namespace SchetsEditor
         private Schets schets;
         private Color penkleur;
 
+		  public bool Saved
+		  {
+			  get { return schets.saved; }
+		  }
+
         public Color PenKleur 
         {   get { return penkleur; } 
         }
+
         public SchetsControl()
         {   this.BorderStyle = BorderStyle.Fixed3D;
             this.schets = new Schets();
@@ -20,33 +27,42 @@ namespace SchetsEditor
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
         }
+
         protected override void OnPaintBackground(PaintEventArgs e)
         {
         }
+
         private void teken(object o, PaintEventArgs pea)
-        {   schets.Teken(pea.Graphics);
+		  {  
+			  schets.Teken(pea.Graphics);
         }
+
         private void veranderAfmeting(object o, EventArgs ea)
         {   schets.VeranderAfmeting(this.ClientSize);
             this.Invalidate();
         }
+
         public Graphics MaakBitmapGraphics()
         {   Graphics g = schets.BitmapGraphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             return g;
         }
+
         public void Schoon(object o, EventArgs ea)
         {   schets.Schoon();
             this.Invalidate();
         }
+
         public void Roteer(object o, EventArgs ea)
         {   schets.Roteer();
             this.veranderAfmeting(o, ea);
         }
+
         public void VeranderKleur(object obj, EventArgs ea)
         {   string kleurNaam = ((ComboBox)obj).Text;
             penkleur = Color.FromName(kleurNaam);
         }
+
         public void VeranderKleurViaMenu(object obj, EventArgs ea)
         {   string kleurNaam = ((ToolStripMenuItem)obj).Text;
             penkleur = Color.FromName(kleurNaam);
@@ -57,32 +73,32 @@ namespace SchetsEditor
            this.schets.AddBouwsteen(bouwsteen);
         }
         
-       public void RemoveBouwsteen(int x, int y)
+        public void RemoveBouwsteen(int x, int y)
         {
            this.schets.RemoveBouwsteen(x, y);
            this.Invalidate();
         }
-        /*public void listEntry(ISchetsTool tool, SizeF grootte, string text, Font font, Point begin, Point eind)
-        {
-           Bouwsteen entry = new Bouwsteen();
-           entry.tool = tool;
-           entry.grootte = grootte;
-           entry.kleur = this.PenKleur;
-           entry.text = text;
-           entry.font = font;
-           entry.begin = begin;
-           entry.einde = eind;
-           schets.lijst.Add(entry);
-        }*/
-
+        
         public void opslaan(object sender, EventArgs ea)
         {
            this.schets.opslaan();
         }
 
-       public void openBitmap(Bitmap afbeelding)
+		  public void opslaanSchets(object sender, EventArgs ea)
+		  {
+			  this.schets.opslaanSchets();
+		  }
+
+        public void openBitmap(Bitmap afbeelding)
         {
-           this.schets.laden(afbeelding);
+			  schets.laden(afbeelding);
+			  this.Invalidate();
         }
+
+		  public void laadSchets(List<string> lijst)
+		  {
+			  schets.laadSchets(lijst);
+			  this.Invalidate();
+		  }
     }
 }

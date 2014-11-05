@@ -12,3 +12,10 @@ C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\SchetsEdito
 C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\SchetsEditor.csproj.GenerateResource.Cache
 C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\bin\Debug\Schets.exe
 C:\Users\noud\Documents\GitHub\Schetsplus\SchetsEditor\bin\Debug\Schets.pdb
+D:\My Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\Schets.exe
+D:\My Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\SchetsEditor.csprojResolveAssemblyReference.cache
+D:\My Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\SchetsEditor.Properties.Resources.resources
+D:\My Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\SchetsEditor.csproj.GenerateResource.Cache
+D:\My Documents\GitHub\Schetsplus\SchetsEditor\bin\Debug\Schets.exe
+D:\My Documents\GitHub\Schetsplus\SchetsEditor\bin\Debug\Schets.pdb
+D:\My Documents\GitHub\Schetsplus\SchetsEditor\obj\x86\Debug\Schets.pdb

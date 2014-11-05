@@ -4,14 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
+//Deze klasse beschrijft elementen die moeten worden getekent. 
+
 namespace SchetsEditor
 {
-   public abstract class Bouwsteen
+   //elk type bouwsteen heeft ten minste deze eigenschappen. 
+	public abstract class Bouwsteen
    {
       int beginx, beginy;
       protected Size grootte;
+		
+      //dit is nuttig voor het gummen
+		public bool Hitbox(int x, int y)
+		{
+			return (x >= beginx && x <= beginx + grootte.Width && y >= beginy && y <= beginy + grootte.Height);
+		}
 
-      public int X
+		public int X
         { get { return this.beginx; } }
 
         public int Y
@@ -32,15 +41,17 @@ namespace SchetsEditor
       Char karakter;
       Brush kwast;
 
-      public TekstSteen(int x, int y, char karakter, Font font, Brush kwast) : base(x, y, new Size())
+      public TekstSteen(int x, int y, char c, Font font, Brush kwast) : base(x, y, new Size())
       {
-         this.karakter = karakter;
+         this.karakter = c;
          this.font = font;
          this.kwast = kwast;
       }
+
       public override void teken(Graphics g)
       { g.DrawString(karakter.ToString(), font, kwast, this.X, this.Y);
       }
+
       public Size Grootte
       { set { this.grootte = value; } }
 

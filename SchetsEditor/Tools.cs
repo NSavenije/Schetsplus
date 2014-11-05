@@ -45,9 +45,7 @@ namespace SchetsEditor
                 string tekst = c.ToString();
                 SizeF sz = 
                 gr.MeasureString(tekst, font, this.startpunt, StringFormat.GenericTypographic);
-                gr.DrawString   (tekst, font, kwast, 
-                                              this.startpunt, StringFormat.GenericTypographic);
-                // gr.DrawRectangle(Pens.Black, startpunt.X, startpunt.Y, sz.Width, sz.Height);
+                gr.DrawString   (tekst, font, kwast, this.startpunt, StringFormat.GenericTypographic);
                 this.bouwsteen = new TekstSteen(startpunt.X, startpunt.Y, c, font, kwast);
                 ((TekstSteen)this.bouwsteen).Grootte= new Size((int)sz.Width, (int)sz.Height);
                 s.AddBouwsteen(this.bouwsteen);
@@ -107,8 +105,7 @@ namespace SchetsEditor
         {
            base.MuisLos(s, p);
            if (this.bouwsteen == null)
-              this.bouwsteen = new RechthoekSteen(Math.Min(startpunt.X, p.X), Math.Min(p.Y, startpunt.Y), MaakPen(this.kwast, 3),
-                                              new Size(Math.Abs(p.X - startpunt.X), Math.Abs(p.Y - startpunt.Y)));
+              this.bouwsteen = new RechthoekSteen(Math.Min(startpunt.X, p.X), Math.Min(p.Y, startpunt.Y), MaakPen(this.kwast, 3), new Size(Math.Abs(p.X - startpunt.X), Math.Abs(p.Y - startpunt.Y)));
            s.AddBouwsteen(this.bouwsteen);
         }
     }
@@ -147,7 +144,6 @@ namespace SchetsEditor
            this.bouwsteen = new LijnSteen(startpunt.X, startpunt.Y, MaakPen(this.kwast, 3), new Size(p.X - startpunt.X, p.Y - startpunt.Y));
            s.AddBouwsteen(this.bouwsteen);
         }
-
     }
 
    public class CirkelTool : TweepuntTool
@@ -201,8 +197,6 @@ namespace SchetsEditor
            this.MuisLos(s, p);
             this.MuisVast(s, p);
         }
-
-
     }
     
     public class GumTool : ISchetsTool
@@ -212,12 +206,11 @@ namespace SchetsEditor
        {
           s.RemoveBouwsteen(p.X, p.Y);
        }
-       public  void MuisVast(SchetsControl s, Point p)
+       public void MuisVast(SchetsControl s, Point p)
        { }
-       public  void MuisDrag(SchetsControl s, Point p)
+       public void MuisDrag(SchetsControl s, Point p)
        { }
        public void Letter(SchetsControl s, char c)
-       { }
-        
+       { }        
     }
 }
